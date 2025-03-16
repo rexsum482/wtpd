@@ -18,10 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from users.views import UserViewSet
+from wallets.views import WalletViewSet
 from rest_framework.authtoken.views import ObtainAuthToken
 
 router = DefaultRouter()
 router.register('users', UserViewSet, basename='user')
+router.register('wallets', WalletViewSet, basename='wallet')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
