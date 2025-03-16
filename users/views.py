@@ -1,11 +1,12 @@
 from rest_framework import viewsets
 from .serializers import UserSerializer
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.status import HTTP_403_FORBIDDEN, HTTP_205_RESET_CONTENT, HTTP_400_BAD_REQUEST, HTTP_201_CREATED
+User = get_user_model()
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

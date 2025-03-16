@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class Wallet(models.Model):
-    """Model for user's wallet."""
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="wallet")
     address = models.CharField(max_length=35, unique=True)
     balance = models.DecimalField(max_digits=32, decimal_places=6, default=Decimal("0.000000"))
