@@ -30,5 +30,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('auth/', ObtainAuthToken.as_view(), name='authenticate'),
+    path('verify/', UserViewSet.as_view({'get': 'verify'})),
     re_path(r"^(?:.*)/?$", serve_react_app),
 ]

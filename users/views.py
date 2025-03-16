@@ -1,6 +1,7 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from .serializers import UserSerializer
 from django.contrib.auth import get_user_model
+from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -25,6 +26,16 @@ class UserViewSet(viewsets.ModelViewSet):
     def me(self, request):
         serializer = UserSerializer(request.user, context={'request': request})
         return Response(serializer.data)
+
+    @action(detail=False, methods=["get"])
+    def verify(self, request):
+        token = request.data.get("token")
+        if not token:
+            return Response({"detail": "Token is required"}, status=status.HTTP_400_BAD_REQUEST)
+        user_token = Token.objects.filter(key=token).first()
+        if not user_token:
+            return Response({"detail": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"detail": "Token is valid"}, status=status.HTTP_200_OK)
     
     def get_authenticators(self):
         if self.request.method == 'POST':
