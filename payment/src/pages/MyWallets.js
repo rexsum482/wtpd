@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Layout, List, Typography, Card, Tag } from "antd";
+import { Layout, List, Typography, Tag } from "antd";
 import WalletContent from "../components/WalletContent";
 
 const { Content, Sider } = Layout;
@@ -14,7 +14,6 @@ const MyWallets = ({ wallets = [], setWallets }) => {
                 style={{ 
                     padding: "16px", 
                     height: "85vh", 
-                    backgroundImage: `url(${bg2})`, 
                     backgroundSize: "cover", 
                     backgroundColor: "#ffffff",
                     boxShadow: "4px 0 10px rgba(0, 0, 0, 0.15)"

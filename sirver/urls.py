@@ -15,11 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
 from users.views import UserViewSet
 from wallets.views import WalletViewSet
 from rest_framework.authtoken.views import ObtainAuthToken
+from .views import serve_react_app
 
 router = DefaultRouter()
 router.register('users', UserViewSet, basename='user')
@@ -29,4 +30,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('auth/', ObtainAuthToken.as_view(), name='authenticate'),
+    re_path(r"^(?:.*)/?$", serve_react_app),
 ]
